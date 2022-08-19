@@ -6,7 +6,7 @@ This repository contains parts of code for the publication publication "A Physic
 Brief description of the provided code/data
 
 
-- `get_velocity_feature.m`: 
+- `Signal_processing_v3_all.py`:  Python file for data preparation and signal processing. Generates training and test datasets.
 
 The corresponding data repositories can be downloaded at: https://data.mendeley.com/drafts/ms2zktk6v9
-NOTE: Please contact Prof. Chao Hu, chaohu@iastate.edu, for any questions. 
+NOTE: Please contact Hao Lu, hlu1@iastate.edu, for any questions. 
