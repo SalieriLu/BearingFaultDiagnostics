@@ -6,8 +6,7 @@ Created on Wed Oct 13 21:53:10 2021
 """
 #load data resample and creat sub-signals
 
-#main purpose 
-#creat subsignal and do cot and envelope analysis
+
 import numpy as np
 import os,sys
 import xlrd
@@ -17,7 +16,7 @@ from scipy import signal
 from scipy.interpolate import interp1d
 xlrd.xlsx.ensure_elementtree_imported(False, None)
 xlrd.xlsx.Element_has_iter = True
-#define the dir location
+#define the dir 
 
 work_path=r'C:\Users\luhao\Dropbox\IWSHM_code\bearingforconference'
 dB_list=[-8,-10,-12]
@@ -39,7 +38,6 @@ def adding_Noise(signal,target_SNR):
     # Generate an sample of white noise
     mean_noise = 0
     noise_volts = np.random.normal(mean_noise, np.sqrt(noise_avg_watts), len(signal))
-    # Noise up the original signal
     signal2 = signal + noise_volts
     return signal2
 
@@ -90,7 +88,6 @@ def Signal_processing_step1(new_sf,noise_db,sub_len,stride):
             speed=data1.col_values(4)[1]
             datac = d2[0:sub_len]
             datac=np.concatenate((datac,[float(speed),int(index)]),0)
-            # for i2 in range(1, int(np.floor((np.size(data)-sub_len )/ overlap))):
             for i2 in range(1,sub_number+1):
                 a=d2[int(i2 * stride):(sub_len + int(i2 * stride))]
                 a=np.concatenate((a,[float(speed),int(index)]),0)
@@ -122,8 +119,6 @@ for i in dB_list:
     data_type='/train/'
     
     #Generate training data
-    # Signal_processing_step1(sf,None,1*sf,0.5*sf)#New sf=25600, None noise, 1 subsignal length stride=0.5
-    
     Signal_processing_step1(sf,i,1*sf,0.5*sf)
     
     
@@ -132,13 +127,10 @@ for i in dB_list:
     file_path = work_path+'\dataset2\\'#1 for train 2 for test
     
     save_file_path=r'C:\Users\luhao\Dropbox\Research_folder\Paper writting\Preparation of Journal paper\Feature-Weightting Paper\CNN-CWL\Signal_processing_folder\Generated_data'
-    
-    data_type='/test/'#Modify this
-    
-    #Generate training data
-    
-    # Signal_processing_step1(sf,None,1*sf,0.5*sf)#New sf=25600, None noise, 1 subsignal length stride=0.5
-    
+        
+    #Generate test data
+    data_type='/test/'
+
     Signal_processing_step1(sf,i,1*sf,0.5*sf)
     
     
@@ -152,7 +144,7 @@ for i in dB_list:
 import scipy.fft
 import scipy.signal
 
-#define the dir location
+#define the dir 
 work_path=r'C:\Users\luhao\Dropbox\Bearing diagnosis\\'
 file_path = work_path+'\data\dataset\\'
 code_path = work_path+'\code\\'
@@ -177,11 +169,10 @@ def data_analysis(data,sf):
 
 
 saveing_size=1600
-#open the files and generate raw subsignal
 
 def signalanalysis(file_path,save_path,foldername,new_sf):
     ##function define
-    sub_len = 1 * new_sf  # frequency resolution =0.2
+    sub_len = 1 * new_sf  
     ##
     os.chdir(file_path)
     
