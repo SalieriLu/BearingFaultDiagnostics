@@ -8,6 +8,5 @@ Brief description of the provided code/data
 
 - `get_velocity_feature.m`: 
 
-The corresponding data repositories can be downloaded at: 
-
+The corresponding data repositories can be downloaded at: https://data.mendeley.com/drafts/ms2zktk6v9
 NOTE: Please contact Prof. Chao Hu, chaohu@iastate.edu, for any questions. 
