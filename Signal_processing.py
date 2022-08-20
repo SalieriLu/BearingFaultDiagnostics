@@ -32,7 +32,7 @@ def adding_Noise(signal,target_SNR):
     # Calculate signal power and convert to dB 
     sig_avg_watts = np.mean(signal)
     sig_avg_db = 10 * np.log10(abs(sig_avg_watts))
-    # Calculate noise according then convert to watts
+    # Calculate noise power
     noise_avg_db = sig_avg_db - target_SNR
     noise_avg_watts = 10 ** (noise_avg_db / 10)
     # Generate an sample of white noise
@@ -74,10 +74,8 @@ def Signal_processing_step1(new_sf,noise_db,sub_len,stride):
             x1 = xlrd.open_workbook(label_name + '/test/' + files[i])
             data1 = x1.sheet_by_name('sheet1')
             d = data1.col_values(1)[1:]
-            
             if new_sf != 25600:
                 d= res(d,10*new_sf)
-        
             if noise_db==None:
                 d2=d
                 folder_mark='Raw'
@@ -107,7 +105,7 @@ def Signal_processing_step1(new_sf,noise_db,sub_len,stride):
 
 
 
-# #Training
+# #Generate training and test dataset
 for i in dB_list:
         
     
@@ -118,7 +116,7 @@ for i in dB_list:
     sf=12800
     data_type='/train/'
     
-    #Generate training data
+    #Generate training dataset
     Signal_processing_step1(sf,i,1*sf,0.5*sf)
     
     
@@ -128,17 +126,12 @@ for i in dB_list:
     
     save_file_path=r'C:\Users\luhao\Dropbox\Research_folder\Paper writting\Preparation of Journal paper\Feature-Weightting Paper\CNN-CWL\Signal_processing_folder\Generated_data'
         
-    #Generate test data
+    #Generate test dataset
     data_type='/test/'
 
     Signal_processing_step1(sf,i,1*sf,0.5*sf)
     
     
-
-
-
-
-#second part for signal process
 
 
 import scipy.fft
