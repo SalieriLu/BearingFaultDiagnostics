@@ -21,14 +21,7 @@ from keras import Input
 import matplotlib.pyplot as plt
 from keras.models import Model
 from keras.callbacks import EarlyStopping
-##############
-# new_sf=12800
-# sig = [10, 10, 10]
-# k = [20, 20, 20]
-# sig = [1, 1, 1]
-# k = [0, 0, 0]
-###############
-#seperate train data and test data (input data and label )
+
 ################################################
 # Physical-based feature weighting (PFW) 
 
@@ -42,7 +35,7 @@ class PWL(keras.layers.Layer):#Gaussian based weighting layer.
         super(PWL, self).__init__(**kwargs)
     def get_config(self):
         config = super(PWL,self).get_config()
-        # config.update({'c_v':self.center_value,'rate':self.rate,'k1':self.k1,'sigma1':self.sigma1,'k2':self.k2,'sigma2':self.sigma2,'k3':self.k3,'sigma3':self.sigma3})
+      
         config["c_v"]=self.center_value
         config['rate']=self.rate
         config['k1'] = self.k1.numpy()
@@ -106,8 +99,7 @@ new_sf=1000
 
 file_path = r'C:\Users\luhao\Dropbox\Research_folder\Codes\CNN-CWL\processed_1_all'
 file_path2 = r'C:\Users\luhao\Dropbox\Research_folder\Codes\CNN-CWL\processed_2_all'
-# file_path = r'C:\Users\sshen\Dropbox\IWSHM_code\bearingforconference\processed1_1\\'
-# file_path2 = r'C:\Users\sshen\Dropbox\IWSHM_code\bearingforconference\processed2_1\\'
+
 
 # Construct training data for CNN model without PFW
 os.chdir(file_path)
